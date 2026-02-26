@@ -1,1 +1,74 @@
+/*
+Program name: style.css
+Author: Peter Tran
+Date created: 02/20/2026
+Date last edited: 02/26/2026
+Version: 2.0
+Description: This CSS document will determine the visual styling and how the patient registration form appears, defining colors, fonts, and layout.
+*/
 
+body {
+    background-color: #f4f8fb; 
+    font-family: Arial, Helvetica, sans-serif; 
+    color: #333333;
+    margin: 20px;
+}
+
+table {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 0 auto; 
+}
+
+td {
+    padding: 8px;
+}
+
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #4a235a;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#header {
+    text-align: center;
+    padding: 15px;
+    background-color: #e2eafc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#main-content {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+
+#footer {
+    text-align: center;
+    background-color: #e2eafc;
+    padding: 15px;
+    font-size: 0.9em;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.banner h1 {
+    color: #003366;
+    font-family: Verdana, Geneva, sans-serif; 
+}
+
+h2, h3 {
+    color: #003366;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
