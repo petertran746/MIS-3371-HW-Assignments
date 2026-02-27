@@ -20,6 +20,7 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
     <div id="header" class="banner">
         <img src="logo.png" alt="Pete's Medical Logo">
         <h1>Pete's Medical</h1>
+        <p>Today is: <span id="dynamic-date"></span></p>
     </div>
 
     <hr>
@@ -221,6 +222,10 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
         <br><br>
         <a href="https://facebook.com" style="font-size: 12px;">Facebook</a> | <a href="https://instagram.com" style="font-size: 12px;">Instagram</a>
     </div>
-
+    
+    <script>
+        const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+        document.getElementById('dynamic-date').innerHTML = new Date().toLocaleDateString('en-US', options);
+    </script>
 </body>
 </html>
