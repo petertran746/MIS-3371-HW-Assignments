@@ -47,6 +47,13 @@ a:hover {
     margin-bottom: 20px;
 }
 
+#header img {
+    width: 250px;
+    height: auto; 
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
 #main-content {
     margin: 20px auto;
     width: 90%;
@@ -64,7 +71,8 @@ a:hover {
 
 .banner h1 {
     color: #003366;
-    font-family: Verdana, Geneva, sans-serif; 
+    font-family: Verdana, Geneva, sans-serif;
+    margin: 5px 0;
 }
 
 h2, h3 {
