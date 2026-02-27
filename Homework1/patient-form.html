@@ -1,15 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-Program name: patient-form.html
-Author: Peter Tran
-Date created: 02/20/2026
-Date last edited: 02/26/2026
-Version: 3.0
-Description: This HTML document's particular purpose is to create a digital registration form. 
-It instructs the computer where to show buttons, checkboxes, and text boxes on the screen, 
-allowing a patient to choose symptoms, enter personal information, and click "Submit"
--->
 <head>
     <meta charset="UTF-8">
     <title>Patient Registration - Pete's Medical</title>
@@ -25,21 +15,15 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
     <hr>
 
     <div id="main-content">
-        <p style="text-align: right; padding-right: 10%; font-weight: bold;">Date: ___________</p>
+        <div style="text-align: right; padding-right: 15%;">
+            <p>Date: <u>February 26, 2026</u></p>
+        </div>
+        
         <h2 style="text-align: center;">New Patient Registration Form</h2>
         
         <form action="thankyou.html">
             <table align="center" style="width: 80%; max-width: 800px;">
                 
-                <tr>
-                    <td><label for="pwd">Password:</label></td>
-                    <td><input type="password" id="pwd" name="pwd" required></td>
-                </tr>
-                <tr>
-                    <td><label for="cpwd">Confirm Password:</label></td>
-                    <td><input type="password" id="cpwd" name="cpwd" required></td>
-                </tr>
-
                 <tr>
                     <td><label for="fname">First Name:</label></td>
                     <td><input type="text" id="fname" name="fname" required></td>
@@ -52,14 +36,27 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
                     <td><label for="lname">Last Name:</label></td>
                     <td><input type="text" id="lname" name="lname" required></td>
                 </tr>
+
+                <tr>
+                    <td><label for="userid">User ID:</label></td>
+                    <td><input type="text" id="userid" name="userid" required></td>
+                </tr>
+                <tr>
+                    <td><label for="pwd">Password:</label></td>
+                    <td><input type="password" id="pwd" name="pwd" required></td>
+                </tr>
+                <tr>
+                    <td><label for="cpwd">Confirm Password:</label></td>
+                    <td><input type="password" id="cpwd" name="cpwd" required></td>
+                </tr>
                 
                 <tr>
                     <td><label for="dob">D.O.B:</label></td>
                     <td>
                         <input type="date" id="dob" name="dob" required style="margin-right: 20px;">
                         
-                        <label for="ssn" style="font-weight: bold;">SSN:</label>
-                        <input type="password" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required style="width: 120px;">
+                        <label for="ssn">SSN:</label>
+                        <input type="password" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required style="width: 120px; margin-left: 5px;">
                     </td>
                 </tr>
                 
@@ -77,8 +74,8 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
                     <td>
                         <input type="text" id="city" name="city" required style="width: 140px; margin-right: 10px;">
                         
-                        <label for="state" style="font-weight: bold;">State:</label>
-                        <select id="state" name="state" required style="width: 130px; margin-right: 10px;">
+                        <label for="state">State:</label>
+                        <select id="state" name="state" required style="width: 130px; margin-right: 10px; margin-left: 5px;">
                             <option value="" disabled selected>Select</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -133,8 +130,8 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
                             <option value="WY">Wyoming</option>
                         </select>
                         
-                        <label for="zip" style="font-weight: bold;">Zip:</label>
-                        <input type="text" id="zip" name="zip" required style="width: 80px;">
+                        <label for="zip">Zip:</label>
+                        <input type="text" id="zip" name="zip" required style="width: 80px; margin-left: 5px;">
                     </td>
                 </tr>
                 
@@ -164,9 +161,9 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
                 <tr>
                     <td>Previous Illnesses:</td>
                     <td>
-                        <input type="checkbox" id="ill1" name="illness" value="measles"><label for="ill1"> Measles</label><br>
-                        <input type="checkbox" id="ill2" name="illness" value="covid"><label for="ill2"> Covid-19</label><br>
-                        <input type="checkbox" id="ill3" name="illness" value="chickenpox"><label for="ill3"> Chicken Pox</label><br>
+                        <input type="checkbox" id="ill1" name="illness" value="chickenpox"><label for="ill1"> Chicken Pox</label><br>
+                        <input type="checkbox" id="ill2" name="illness" value="measles"><label for="ill2"> Measles</label><br>
+                        <input type="checkbox" id="ill3" name="illness" value="covid"><label for="ill3"> Covid-19</label><br>
                         <input type="checkbox" id="ill4" name="illness" value="smallpox"><label for="ill4"> Small Pox</label><br>
                         <input type="checkbox" id="ill5" name="illness" value="tetanus"><label for="ill5"> Tetanus</label>
                     </td>
@@ -196,9 +193,9 @@ allowing a patient to choose symptoms, enter personal information, and click "Su
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="form-buttons">
+                    <td colspan="2" style="text-align: center; padding-top: 30px; padding-bottom: 20px;">
                         <input type="submit" value="Submit">
-                        <input type="reset" value="Reset">
+                        <input type="reset" value="Reset" style="margin-left: 15px;">
                     </td>
                 </tr>
             </table>
