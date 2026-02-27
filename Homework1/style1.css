@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registration - Pete's Medical</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div id="header" class="banner">
+        <img src="logo.png" alt="Pete's Medical Logo">
+        <h1>Pete's Medical</h1>
+    </div>
+
+    <hr>
+
+    <div id="main-content">
+        <p style="text-align: right; padding-right: 10%; font-weight: bold;">Date: ___________</p>
+        <h2 style="text-align: center;">New Patient Registration Form</h2>
+        
+        <form action="thankyou.html">
+            <table align="center" style="width: 80%; max-width: 800px;">
+                
+                <tr>
+                    <td><label for="pwd">Password:</label></td>
+                    <td><input type="password" id="pwd" name="pwd" required></td>
+                </tr>
+                <tr>
+                    <td><label for="cpwd">Confirm Password:</label></td>
+                    <td><input type="password" id="cpwd" name="cpwd" required></td>
+                </tr>
+
+                <tr>
+                    <td><label for="fname">First Name:</label></td>
+                    <td><input type="text" id="fname" name="fname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="mi">MI:</label></td>
+                    <td><input type="text" id="mi" name="mi" maxlength="1" style="width: 40px;"></td>
+                </tr>
+                <tr>
+                    <td><label for="lname">Last Name:</label></td>
+                    <td><input type="text" id="lname" name="lname" required></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="dob">D.O.B:</label></td>
+                    <td>
+                        <input type="date" id="dob" name="dob" required style="margin-right: 20px;">
+                        
+                        <label for="ssn" style="font-weight: bold;">SSN:</label>
+                        <input type="password" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required style="width: 120px;">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="address1">Address Line 1:</label></td>
+                    <td><input type="text" id="address1" name="address1" required style="width: 90%;"></td>
+                </tr>
+                <tr>
+                    <td><label for="address2">Address Line 2:</label></td>
+                    <td><input type="text" id="address2" name="address2" style="width: 90%;"></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="city">City:</label></td>
+                    <td>
+                        <input type="text" id="city" name="city" required style="width: 140px; margin-right: 10px;">
+                        
+                        <label for="state" style="font-weight: bold;">State:</label>
+                        <select id="state" name="state" required style="width: 130px; margin-right: 10px;">
+                            <option value="" disabled selected>Select</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                        
+                        <label for="zip" style="font-weight: bold;">Zip:</label>
+                        <input type="text" id="zip" name="zip" required style="width: 80px;">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone #:</label></td>
+                    <td><input type="tel" id="phone" name="phone" placeholder="(XXX) XXX-XXXX" required></td>
+                </tr>
+
+                <tr>
+                    <td>Sex:</td>
+                    <td>
+                        <input type="radio" id="male" name="sex" value="male"><label for="male"> Male</label> &nbsp;&nbsp;
+                        <input type="radio" id="female" name="sex" value="female"><label for="female"> Female</label> &nbsp;&nbsp;
+                        <input type="radio" id="other" name="sex" value="other"><label for="other"> Other</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="symptoms">Symptoms:</label></td>
+                    <td><textarea id="symptoms" name="symptoms" rows="3" style="width: 90%;"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>Previous Illnesses:</td>
+                    <td>
+                        <input type="checkbox" id="ill1" name="illness" value="measles"><label for="ill1"> Measles</label><br>
+                        <input type="checkbox" id="ill2" name="illness" value="covid"><label for="ill2"> Covid-19</label><br>
+                        <input type="checkbox" id="ill3" name="illness" value="chickenpox"><label for="ill3"> Chicken Pox</label><br>
+                        <input type="checkbox" id="ill4" name="illness" value="smallpox"><label for="ill4"> Small Pox</label><br>
+                        <input type="checkbox" id="ill5" name="illness" value="tetanus"><label for="ill5"> Tetanus</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Vaccinated:</td>
+                    <td>
+                        <input type="radio" id="vax-yes" name="vax" value="yes"><label for="vax-yes"> Yes</label> &nbsp;&nbsp;
+                        <input type="radio" id="vax-no" name="vax" value="no"><label for="vax-no"> No</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Insurance:</td>
+                    <td>
+                        <input type="radio" id="ins-yes" name="ins" value="yes"><label for="ins-yes"> Yes</label> &nbsp;&nbsp;
+                        <input type="radio" id="ins-no" name="ins" value="no"><label for="ins-no"> No</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="health">Health Scale:</label></td>
+                    <td>
+                        1 <input type="range" id="health" name="health" min="1" max="10" style="width: 200px;"> 10
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="form-buttons">
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <hr>
+
+    <div id="footer" style="text-align: center;">
+        <h3>Pete's Medical</h3>
+        <p>PO BOX 18381<br>Houston, TX 77937</p>
+        <button type="button" onclick="alert('Contacting support...')">CONTACT US</button>
+        <br><br>
+        <a href="https://facebook.com" style="font-size: 12px;">Facebook</a> | <a href="https://instagram.com" style="font-size: 12px;">Instagram</a>
+    </div>
+
+</body>
+</html>
