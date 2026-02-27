@@ -81,7 +81,31 @@ h2, h3 {
     text-align: center;
 }
 
+
 td:nth-child(odd) {
     text-align: right;
     padding-right: 15px;
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="tel"], 
+select, 
+textarea {
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+#city {
+    width: 180px; 
+}
+
+#state {
+    width: 140px; 
+}
+
+#zip {
+    width: 80px;  
 }
