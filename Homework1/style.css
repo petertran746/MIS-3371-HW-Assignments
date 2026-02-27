@@ -82,8 +82,8 @@ h2, h3 {
 }
 
 td:first-child:not([colspan]) {
-    text-align: left;
-    padding-right: 15px; 
+    text-align: right;
+    padding-right: 25px; 
     width: 40%; 
 }
 
