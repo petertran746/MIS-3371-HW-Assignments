@@ -3,7 +3,7 @@ Program name: script.js
 Author: Peter Tran
 Date created: 03/24/2026
 Date last edited: 03/24/2026
-Version: 1.0
+Version: 3.0
 Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, and injecting data into the review table.
 */
 
