@@ -1,9 +1,18 @@
-// --- DYNAMIC SLIDER ---
+/*
+Program name: script.js
+Author: Peter Tran
+Date created: 03/24/2026
+Date last edited: 03/24/2026
+Version: 1.0
+Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, and injecting data into the review table.
+*/
+
+
 function updateSliderValue() {
     document.getElementById('painOutput').innerText = document.getElementById('painSlider').value;
 }
 
-// --- VALIDATION MODULES ---
+
 function validateFirstName() {
     const val = document.getElementById('fName').value;
     const err = document.getElementById('fNameError');
@@ -159,9 +168,9 @@ function validatePasswords() {
     return valid;
 }
 
-// --- MAIN REVIEW FUNCTION ---
+
 function generateReview() {
-    // Run all validations to ensure form is clean before generating table
+   
     const isValid = validateFirstName() & validateLastName() & validateDOB() & validateSSN() & validateEmail() & validatePhone() & validateAddress1() & validateCity() & validateState() & validateZip() & validateRadio() & validateTextArea() & validateUserID() & validatePasswords();
 
     if (!isValid) {
@@ -169,15 +178,15 @@ function generateReview() {
         return;
     }
 
-    // Unhide Table Area
+
     document.getElementById('reviewArea').style.display = 'block';
     const table = document.getElementById('reviewTable');
     
-    // Process Data
+
     const fullName = `${document.getElementById('fName').value} ${document.getElementById('mInit').value} ${document.getElementById('lName').value}`;
     const fullAddress = `${document.getElementById('address1').value} ${document.getElementById('address2').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value.substring(0,5)}`; // Truncated Zip
     
-    // Checkboxes
+
     let conditions = [];
     if(document.getElementById('chkPox').checked) conditions.push("Chicken Pox");
     if(document.getElementById('chkMeasles').checked) conditions.push("Measles");
@@ -186,10 +195,9 @@ function generateReview() {
     if(document.getElementById('chkCovid').checked) conditions.push("Covid-19");
     const conditionsStr = conditions.length > 0 ? conditions.join(", ") : "None";
 
-    // Radio
+
     const vacSelected = document.querySelector('input[name="vaccinated"]:checked').value;
 
-    // Inject into Table
     table.innerHTML = `
         <tr><th style="padding:8px; width:30%;">Field</th><th style="padding:8px; width:50%;">Data Entered</th><th style="padding:8px; width:20%;">Status</th></tr>
         <tr><td style="padding:5px;">Full Name</td><td style="padding:5px;">${fullName}</td><td style="padding:5px; color:green;">pass</td></tr>
