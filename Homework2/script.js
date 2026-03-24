@@ -50,10 +50,8 @@ function validateDOB() {
     
     const dob = new Date(val);
     const today = new Date();
-    const minDate = new Date(); minDate.setFullYear(today.getFullYear() - 120);
 
     if (dob > today) { err.innerText = "Error: Cannot be in future"; return false; }
-    if (dob < minDate) { err.innerText = "Error: Cannot be > 120 years ago"; return false; }
     
     err.innerText = ""; return true;
 }
