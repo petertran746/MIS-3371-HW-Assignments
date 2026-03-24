@@ -1,226 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-Program name: patient-form.html
-Author: Peter Tran
-Date created: 02/20/2026
-Date last edited: 02/26/2026
-Version: 6.0
-Description: This HTML document's particular purpose is to create a digital registration form. 
-It instructs the computer where to show buttons, checkboxes, and text boxes on the screen, 
-allowing a patient to choose symptoms, enter personal information, and click "Submit"
--->
 <head>
     <meta charset="UTF-8">
-    <title>Patient Registration - Pete's Medical</title>
-    <link href="style.css" rel="stylesheet">
+    <title>Patient Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script> 
 </head>
 <body>
+<img src="logo.png" alt="Company Logo">
 
-    <div id="header" class="banner">
-        <img src="logo.png" alt="Pete's Medical Logo">
-        <h1>Pete's Medical</h1>
-        <p>Today's Date: <span id="dynamic-date"></span></p>
-    </div>
-
-    <hr>
-        
-        <h2 style="text-align: center;">New Patient Registration Form</h2>
-        
-        <form action="thankyou.html">
-            <table align="center" style="width: 80%; max-width: 800px;">
-                
-                <tr>
-                    <td><label for="fname">First Name:</label></td>
-                    <td><input type="text" id="fname" name="fname" required style="width: 300px;"></td>
-                </tr>
-                <tr>
-                    <td><label for="mi">MI:</label></td>
-                    <td><input type="text" id="mi" name="mi" maxlength="1" style="width: 40px;"></td>
-                </tr>
-                <tr>
-                    <td><label for="lname">Last Name:</label></td>
-                    <td><input type="text" id="lname" name="lname" required style="width: 300px;"></td>
-                </tr>
-
-                <tr>
-                    <td><label for="userid">User ID:</label></td>
-                    <td><input type="text" id="userid" name="userid" required></td>
-                </tr>
-                <tr>
-                    <td><label for="pwd">Password:</label></td>
-                    <td><input type="password" id="pwd" name="pwd" required></td>
-                </tr>
-                <tr>
-                    <td><label for="cpwd">Confirm Password:</label></td>
-                    <td><input type="password" id="cpwd" name="cpwd" required></td>
-                </tr>
-                
-                <tr>
-                    <td><label for="dob">D.O.B:</label></td>
-                    <td>
-                        <input type="date" id="dob" name="dob" required style="margin-right: 20px;">
-                        
-                        <label for="ssn">SSN:</label>
-                        <input type="password" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required style="width: 120px; margin-left: 5px;">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td><label for="address1">Address Line 1:</label></td>
-                    <td><input type="text" id="address1" name="address1" required style="width: 90%;"></td>
-                </tr>
-                <tr>
-                    <td><label for="address2">Address Line 2:</label></td>
-                    <td><input type="text" id="address2" name="address2" style="width: 90%;"></td>
-                </tr>
-                
-                <tr>
-                    <td><label for="city">City:</label></td>
-                    <td colspan="5" style="white-space: nowrap;">
-                        <input type="text" id="city" name="city" maxlength="30" style="width: 150px; display: inline-block; vertical-align: middle;">
-                        
-                        <label for="state" style="margin-left: 20px; margin-right: 5px; display: inline-block; vertical-align: middle;">State:</label>
-                        <select id="state" name="state" required style="width: 140px; display: inline-block; vertical-align: middle;">
-                            <option value="" disabled selected>Select</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="DC">District Of Columbia</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
-                        </select>
-                        
-                        <label for="zip" style="margin-left: 20px; margin-right: 5px; display: inline-block; vertical-align: middle;">Zip Code:</label>
-                        <input type="text" id="zip" name="zip" minlength="5" maxlength="10" style="width: 80px; display: inline-block; vertical-align: middle;">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td><label for="email">Email:</label></td>
-                    <td><input type="email" id="email" name="email" required></td>
-                </tr>
-                <tr>
-                    <td><label for="phone">Phone #:</label></td>
-                    <td><input type="tel" id="phone" name="phone" placeholder="(XXX) XXX-XXXX" required></td>
-                </tr>
-
-                <tr>
-                    <td>Sex:</td>
-                    <td>
-                        <input type="radio" id="male" name="sex" value="male"><label for="male"> Male</label> &nbsp;&nbsp;
-                        <input type="radio" id="female" name="sex" value="female"><label for="female"> Female</label> &nbsp;&nbsp;
-                        <input type="radio" id="other" name="sex" value="other"><label for="other"> Other</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><label for="symptoms">Symptoms:</label></td>
-                    <td><textarea id="symptoms" name="symptoms" rows="3" style="width: 90%;"></textarea></td>
-                </tr>
-
-                <tr>
-                    <td>Previous Illnesses:</td>
-                    <td>
-                        <input type="checkbox" id="ill1" name="illness" value="chickenpox"><label for="ill1"> Chicken Pox</label><br>
-                        <input type="checkbox" id="ill2" name="illness" value="measles"><label for="ill2"> Measles</label><br>
-                        <input type="checkbox" id="ill3" name="illness" value="covid"><label for="ill3"> Covid-19</label><br>
-                        <input type="checkbox" id="ill4" name="illness" value="smallpox"><label for="ill4"> Small Pox</label><br>
-                        <input type="checkbox" id="ill5" name="illness" value="tetanus"><label for="ill5"> Tetanus</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Vaccinated:</td>
-                    <td>
-                        <input type="radio" id="vax-yes" name="vax" value="yes"><label for="vax-yes"> Yes</label> &nbsp;&nbsp;
-                        <input type="radio" id="vax-no" name="vax" value="no"><label for="vax-no"> No</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Insurance:</td>
-                    <td>
-                        <input type="radio" id="ins-yes" name="ins" value="yes"><label for="ins-yes"> Yes</label> &nbsp;&nbsp;
-                        <input type="radio" id="ins-no" name="ins" value="no"><label for="ins-no"> No</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><label for="health">Health Scale:</label></td>
-                    <td>
-                        1 <input type="range" id="health" name="health" min="1" max="10" style="width: 200px;"> 10
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2" style="text-align: center; padding-top: 30px; padding-bottom: 20px;">
-                        <input type="submit" value="Submit">
-                        <input type="reset" value="Reset" style="margin-left: 15px;">
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-    <hr>
-
-    <div id="footer" style="text-align: center;">
-        <h3>Pete's Medical</h3>
-        <p>PO BOX 18381<br>Houston, TX 77937</p>
-        <button type="button" onclick="alert('Contacting support...')">CONTACT US</button>
-        <br><br>
-        <a href="https://facebook.com" style="font-size: 12px;">Facebook</a> | <a href="https://instagram.com" style="font-size: 12px;">Instagram</a>
-    </div>
+    <h2>Patient Registration</h2>
     
-    <script>
-        const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-        document.getElementById('dynamic-date').innerHTML = new Date().toLocaleDateString('en-US', options);
-    </script>
+    <form id="registrationForm">
+        <fieldset>
+            <legend>Personal Information</legend>
+            
+            <label for="fName">First Name:</label>
+            <input type="text" id="fName" pattern="[A-Za-z'\-]{1,30}" title="1 to 30 characters. Letters, apostrophes and dashes only" oninput="validateFirstName()" required>
+            <span id="fNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="mInit">Middle Initial:</label>
+            <input type="text" id="mInit" pattern="[A-Za-z]{1}" title="1 character, letters only" oninput="validateMiddleInitial()">
+            <span id="mInitError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="lName">Last Name:</label>
+            <input type="text" id="lName" pattern="[A-Za-z'\-2-5]{1,30}" title="1 to 30 characters. Letters, apostrophes, numbers 2-5, and dashes only" oninput="validateLastName()" required>
+            <span id="lNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" oninput="validateDOB()" required>
+            <span id="dobError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="ssn">SSN / Patient ID:</label>
+            <input type="password" id="ssn" title="Enter your secure ID" oninput="validateSSN()" required>
+            <span id="ssnError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact & Address</legend>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Format: name@domain.tld" oninput="validateEmail()" required>
+            <span id="emailError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" pattern="\d{3}-\d{3}-\d{4}" title="Format: 000-000-0000" oninput="validatePhone()" required>
+            <span id="phoneError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="address1">Address Line 1:</label>
+            <input type="text" id="address1" title="2 to 30 characters" oninput="validateAddress1()" required>
+            <span id="address1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="address2">Address Line 2:</label>
+            <input type="text" id="address2" title="Optional, 2 to 30 characters" oninput="validateAddress2()">
+            <span id="address2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" title="2 to 30 characters" oninput="validateCity()" required>
+            <span id="cityError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="state">State:</label>
+            <select id="state" onchange="validateState()" required>
+                <option value="" disabled selected>Select a State</option>
+                <option value="TX">TX</option>
+                <option value="CA">CA</option>
+                <option value="NY">NY</option>
+                </select>
+            <span id="stateError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" pattern="[0-9\-]{5,10}" title="5 digit zip, up to 10 chars with dash allowed" oninput="validateZip()" required>
+            <span id="zipError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Medical Details</legend>
+
+            <label>Check all that apply:</label><br>
+            <input type="checkbox" id="chkPox" value="Chicken Pox"> Chicken Pox<br>
+            <input type="checkbox" id="chkMeasles" value="Measles"> Measles<br>
+            <input type="checkbox" id="chkMumps" value="Mumps"> Mumps<br>
+            <input type="checkbox" id="chkHeart" value="Heart Disease"> Heart Disease<br>
+            <input type="checkbox" id="chkCovid" value="Covid-19"> Covid-19<br><br>
+
+            <label>Have you been vaccinated?</label><br>
+            <input type="radio" name="vaccinated" value="Yes" onchange="validateRadio()"> Yes<br>
+            <input type="radio" name="vaccinated" value="No" onchange="validateRadio()"> No<br>
+            <input type="radio" name="vaccinated" value="Unsure" onchange="validateRadio()"> Unsure<br>
+            <span id="radioError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="painSlider">Indicate Pain Level (1-10): <strong id="painOutput">5</strong></label><br>
+            <input type="range" id="painSlider" min="1" max="10" step="1" value="5" oninput="updateSliderValue()"><br><br>
+
+            <label for="symptoms">Describe Symptoms:</label><br>
+            <textarea id="symptoms" rows="4" cols="50" oninput="validateTextArea()"></textarea>
+            <span id="symptomsError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Creation</legend>
+
+            <label for="userId">Desired User ID:</label>
+            <input type="text" id="userId" pattern="^[a-zA-Z][a-zA-Z0-9_\-]{4,29}$" title="5-30 chars, starts with letter, no spaces" oninput="validateUserID()" required>
+            <span id="userIdError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="pwd1">Password:</label>
+            <input type="password" id="pwd1" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#%^&*()_\-+=\/><.,`~])[^&quot;]{8,30}$" title="8-30 chars, 1 upper, 1 lower, 1 number, 1 special. NO quotes." oninput="validatePasswords()" required>
+            <span id="pwd1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="pwd2">Re-enter Password:</label>
+            <input type="password" id="pwd2" oninput="validatePasswords()" required>
+            <span id="pwd2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <button type="button" onclick="generateReview()">Review</button>
+        <button type="reset" onclick="location.reload()">Start Over</button>
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div id="reviewArea" style="display:none; margin-top: 30px; border-top: 2px solid #ccc; padding-top: 20px;">
+        <h3>PLEASE REVIEW THIS INFORMATION</h3>
+        <table id="reviewTable" border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            </table>
+    </div>
+
 </body>
 </html>
