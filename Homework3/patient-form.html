@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+Program name: patient-form.html
+Author: Peter Tran
+Date created: 02/20/2026
+Date last edited: 03/24/2026
+Version: 8.0
+Description: This HTML document's particular purpose is to create a digital registration form. 
+It instructs the computer where to show buttons, checkboxes, and text boxes on the screen, 
+allowing a patient to choose symptoms, enter personal information, review their selections, and "Submit"
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script> 
+</head>
+<body>
+<img src="logo.png" alt="Company Logo">
+
+    <h2>Patient Registration</h2>
+    
+    <form id="registrationForm">
+        <fieldset>
+            <legend>Personal Information</legend>
+            
+            <label for="fName">First Name:</label>
+            <input type="text" id="fName" pattern="[A-Za-z'\-]{1,30}" title="1 to 30 characters. Letters, apostrophes and dashes only" oninput="validateFirstName()" required>
+            <span id="fNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="mInit">Middle Initial:</label>
+            <input type="text" id="mInit" pattern="[A-Za-z]{1}" title="1 character, letters only" oninput="validateMiddleInitial()">
+            <span id="mInitError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="lName">Last Name:</label>
+            <input type="text" id="lName" pattern="[A-Za-z'\-2-5]{1,30}" title="1 to 30 characters. Letters, apostrophes, numbers 2-5, and dashes only" oninput="validateLastName()" required>
+            <span id="lNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" oninput="validateDOB()" required>
+            <span id="dobError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="ssn">SSN / Patient ID:</label>
+            <input type="password" id="ssn" title="Enter your secure ID" oninput="validateSSN()" required>
+            <span id="ssnError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact & Address</legend>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Format: name@domain.tld" oninput="validateEmail()" required>
+            <span id="emailError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" pattern="\d{3}-\d{3}-\d{4}" title="Format: 000-000-0000" oninput="validatePhone()" required>
+            <span id="phoneError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="address1">Address Line 1:</label>
+            <input type="text" id="address1" title="2 to 30 characters" oninput="validateAddress1()" required>
+            <span id="address1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="address2">Address Line 2:</label>
+            <input type="text" id="address2" title="Optional, 2 to 30 characters" oninput="validateAddress2()">
+            <span id="address2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" title="2 to 30 characters" oninput="validateCity()" required>
+            <span id="cityError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="state">State:</label>
+            <select id="state" onchange="validateState()" required>
+                <option value="" disabled selected>Select a State</option>
+                <option value="TX">TX</option>
+                <option value="CA">CA</option>
+                <option value="NY">NY</option>
+                </select>
+            <span id="stateError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" pattern="[0-9\-]{5,10}" title="5 digit zip, up to 10 chars with dash allowed" oninput="validateZip()" required>
+            <span id="zipError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Medical Details</legend>
+
+            <label>Check all that apply:</label><br>
+            <input type="checkbox" id="chkPox" value="Chicken Pox"> Chicken Pox<br>
+            <input type="checkbox" id="chkMeasles" value="Measles"> Measles<br>
+            <input type="checkbox" id="chkMumps" value="Mumps"> Mumps<br>
+            <input type="checkbox" id="chkHeart" value="Heart Disease"> Heart Disease<br>
+            <input type="checkbox" id="chkCovid" value="Covid-19"> Covid-19<br><br>
+
+            <label>Have you been vaccinated?</label><br>
+            <input type="radio" name="vaccinated" value="Yes" onchange="validateRadio()"> Yes<br>
+            <input type="radio" name="vaccinated" value="No" onchange="validateRadio()"> No<br>
+            <input type="radio" name="vaccinated" value="Unsure" onchange="validateRadio()"> Unsure<br>
+            <span id="radioError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="painSlider">Indicate Pain Level (1-10): <strong id="painOutput">5</strong></label><br>
+            <input type="range" id="painSlider" min="1" max="10" step="1" value="5" oninput="updateSliderValue()"><br><br>
+
+            <label for="symptoms">Describe Symptoms:</label><br>
+            <textarea id="symptoms" rows="4" cols="50" oninput="validateTextArea()"></textarea>
+            <span id="symptomsError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Creation</legend>
+
+            <label for="userId">Desired User ID:</label>
+            <input type="text" id="userId" pattern="^[a-zA-Z][a-zA-Z0-9_\-]{4,29}$" title="5-30 chars, starts with letter, no spaces" oninput="validateUserID()" required>
+            <span id="userIdError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="pwd1">Password:</label>
+            <input type="password" id="pwd1" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#%^&*()_\-+=\/><.,`~])[^&quot;]{8,30}$" title="8-30 chars, 1 upper, 1 lower, 1 number, 1 special. NO quotes." oninput="validatePasswords()" required>
+            <span id="pwd1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+
+            <label for="pwd2">Re-enter Password:</label>
+            <input type="password" id="pwd2" oninput="validatePasswords()" required>
+            <span id="pwd2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+        </fieldset>
+
+        <button type="button" onclick="generateReview()">Review</button>
+        <button type="reset" onclick="location.reload()">Start Over</button>
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div id="reviewArea" style="display:none; margin-top: 30px; border-top: 2px solid #ccc; padding-top: 20px;">
+        <h3>PLEASE REVIEW THIS INFORMATION</h3>
+        <table id="reviewTable" border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            </table>
+    </div>
+
+</body>
+</html>
