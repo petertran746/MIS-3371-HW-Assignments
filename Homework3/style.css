@@ -97,9 +97,13 @@ button:hover {
 
 
 .error-msg {
+    color: #d9534f; 
     display: inline-block;
     margin-left: 10px;
     font-size: 0.85em;
+    font-weight: bold;
+    min-height: 1em; 
+    vertical-align: middle;
 }
 
 
@@ -129,4 +133,33 @@ th {
 
 #zip {
     width: 80px;  
+}
+
+.invalid-input {
+    border: 2px solid #d9534f !important;
+    background-color: #fff0f0; 
+}
+
+#btnValidate {
+    background-color: #27ae60; 
+}
+
+#btnValidate:hover {
+    background-color: #219150;
+}
+
+
+#btnSubmit {
+    background-color: #3498db;
+    display: none; 
+}
+
+#painOutput {
+    display: inline-block;
+    background: #2c3e50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-size: 0.9em;
 }
