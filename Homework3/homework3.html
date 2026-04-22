@@ -4,8 +4,8 @@
 Program name: patient-form.html
 Author: Peter Tran
 Date created: 02/20/2026
-Date last edited: 03/24/2026
-Version: 10.0
+Date last edited: 04/20/2026
+Version: 13.0
 Description: This HTML document's particular purpose is to create a digital registration form. 
 It instructs the computer where to show buttons, checkboxes, and text boxes on the screen, 
 allowing a patient to choose symptoms, enter personal information, review their selections, and "Submit"
@@ -25,25 +25,29 @@ allowing a patient to choose symptoms, enter personal information, review their 
         <fieldset>
             <legend>Personal Information</legend>
             
-            <label for="fName">First Name:</label>
-            <input type="text" id="fName" pattern="[A-Za-z'\-]{1,30}" title="1 to 30 characters. Letters, apostrophes and dashes only" oninput="validateFirstName()" required>
-            <span id="fNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <tr>
+                <td><label for="fName">First Name:</label></td>
+                <td>
+                    <input type="text" id="fName" oninput="validateFirstName()" required>
+                    <span id="fNameError" class="error-msg"></span>
+                </td>
+            </tr>
 
             <label for="mInit">Middle Initial:</label>
             <input type="text" id="mInit" pattern="[A-Za-z]{1}" title="1 character, letters only" oninput="validateMiddleInitial()">
-            <span id="mInitError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="mInitError" class="error-msg"></span><br><br>
 
             <label for="lName">Last Name:</label>
             <input type="text" id="lName" pattern="[A-Za-z'\-2-5]{1,30}" title="1 to 30 characters. Letters, apostrophes, numbers 2-5, and dashes only" oninput="validateLastName()" required>
-            <span id="lNameError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="lNameError" class="error-msg"></span><br><br>
 
             <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" oninput="validateDOB()" required>
-            <span id="dobError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <input type="date" id="dob" title="Format: MM/DD/YYYY" oninput="validateDOB()" required>
+            <span id="dobError" class="error-msg"></span><br><br>
 
             <label for="ssn">SSN / Patient ID:</label>
-            <input type="password" id="ssn" title="Enter your secure ID" oninput="validateSSN()" required>
-            <span id="ssnError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <input type="password" id="ssn" title="Must be exactly 9 digits" oninput="validateSSN()" required>
+            <span id="ssnError" class="error-msg"></span><br><br>
         </fieldset>
 
         <fieldset>
@@ -51,26 +55,26 @@ allowing a patient to choose symptoms, enter personal information, review their 
 
             <label for="email">Email Address:</label>
             <input type="email" id="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Format: name@domain.tld" oninput="validateEmail()" required>
-            <span id="emailError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="emailError" class="error-msg"></span><br><br>
 
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" pattern="\d{3}-\d{3}-\d{4}" title="Format: 000-000-0000" oninput="validatePhone()" required>
-            <span id="phoneError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="phoneError" class="error-msg"></span><br><br>
 
             <label for="address1">Address Line 1:</label>
             <input type="text" id="address1" title="2 to 30 characters" oninput="validateAddress1()" required>
-            <span id="address1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="address1Error" class="error-msg"></span><br><br>
 
             <label for="address2">Address Line 2:</label>
             <input type="text" id="address2" title="Optional, 2 to 30 characters" oninput="validateAddress2()">
-            <span id="address2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="address2Error" class="error-msg"></span><br><br>
 
             <label for="city">City:</label>
             <input type="text" id="city" title="2 to 30 characters" oninput="validateCity()" required>
-            <span id="cityError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="cityError" class="error-msg"></span><br><br>
 
             <label for="state">State:</label>
-            <select id="state" onchange="validateState()" required>
+            <select id="state" title="Select your state from the list" onchange="validateState()" required>
                 <option value="">--Select a State--</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -128,8 +132,8 @@ allowing a patient to choose symptoms, enter personal information, review their 
             <span id="stateError" class="error-msg"></span>
             
             <label for="zip">Zip Code:</label>
-            <input type="text" id="zip" pattern="[0-9\-]{5,10}" title="5 digit zip, up to 10 chars with dash allowed" oninput="validateZip()" required>
-            <span id="zipError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <input type="text" id="zip" pattern="[0-9]{5}" maxlength="5" title="Exactly 5 digits" oninput="validateZip()" required>
+            <span id="zipError" class="error-msg"></span><br><br>
         </fieldset>
 
         <fieldset>
@@ -146,14 +150,14 @@ allowing a patient to choose symptoms, enter personal information, review their 
             <input type="radio" name="vaccinated" value="Yes" onchange="validateRadio()"> Yes<br>
             <input type="radio" name="vaccinated" value="No" onchange="validateRadio()"> No<br>
             <input type="radio" name="vaccinated" value="Unsure" onchange="validateRadio()"> Unsure<br>
-            <span id="radioError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="radioError" class="error-msg"></span><br><br>
 
             <label for="painSlider">Indicate Pain Level (1-10): <strong id="painOutput">5</strong></label><br>
-            <input type="range" id="painSlider" min="1" max="10" step="1" value="5" oninput="updateSliderValue()"><br><br>
-
+            <input type="range" id="painSlider" min="1" max="10" step="1" value="5" title="Slide left or right to select your pain level from 1 to 10" oninput="updateSliderValue()"><br><br>
+            
             <label for="symptoms">Describe Symptoms:</label><br>
-            <textarea id="symptoms" rows="4" cols="50" oninput="validateTextArea()"></textarea>
-            <span id="symptomsError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <textarea id="symptoms" rows="4" cols="50" title="Briefly describe your symptoms here" oninput="validateTextArea()"></textarea>
+            <span id="symptomsError" class="error-msg"></span><br><br>
         </fieldset>
 
         <fieldset>
@@ -161,15 +165,15 @@ allowing a patient to choose symptoms, enter personal information, review their 
 
             <label for="userId">Desired User ID:</label>
             <input type="text" id="userId" pattern="^[a-zA-Z][a-zA-Z0-9_\-]{4,29}$" title="5-30 chars, starts with letter, no spaces" oninput="validateUserID()" required>
-            <span id="userIdError" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="userIdError" class="error-msg"></span><br><br>
 
             <label for="pwd1">Password:</label>
             <input type="password" id="pwd1" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#%^&*()_\-+=\/><.,`~])[^&quot;]{8,30}$" title="8-30 chars, 1 upper, 1 lower, 1 number, 1 special. NO quotes." oninput="validatePasswords()" required>
-            <span id="pwd1Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <span id="pwd1Error" class="error-msg"></span><br><br>
 
             <label for="pwd2">Re-enter Password:</label>
-            <input type="password" id="pwd2" oninput="validatePasswords()" required>
-            <span id="pwd2Error" class="error-msg" style="color: red; font-size: 0.9em;"></span><br><br>
+            <input type="password" id="pwd2" title="Must exactly match the password entered above" oninput="validatePasswords()" required>
+            <span id="pwd2Error" class="error-msg"></span><br><br>
         </fieldset>
 
         <button type="button" id="btnValidate" onclick="masterValidate()">Validate Form</button>
