@@ -2,16 +2,14 @@
 Program name: script.js
 Author: Peter Tran
 Date created: 03/24/2026
-Date last edited: 03/24/2026
-Version: 3.0
+Date last edited: 04/20/2026
+Version: 7.0
 Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, and injecting data into the review table.
 */
-
 
 function updateSliderValue() {
     document.getElementById('painOutput').innerText = document.getElementById('painSlider').value;
 }
-
 
 function validateFirstName() {
     const val = document.getElementById('fName').value;
@@ -50,22 +48,47 @@ function validateDOB() {
     
     const dob = new Date(val);
     const today = new Date();
+    
+    let minDate = new Date();
+    minDate.setFullYear(today.getFullYear() - 120);
 
     if (dob > today) { err.innerText = "Error: Cannot be in future"; return false; }
+    if (dob < minDate) { err.innerText = "Error: Cannot be > 120 years ago"; return false; }
     
     err.innerText = ""; return true;
 }
 
+
 function validateSSN() {
-    const val = document.getElementById('ssn').value;
+    const input = document.getElementById('ssn');
     const err = document.getElementById('ssnError');
-    if (!val) { err.innerText = "Error: Required"; return false; }
+    
+
+    let val = input.value.replace(/\D/g, ''); 
+    
+  
+    if (val.length > 3 && val.length <= 5) {
+        val = val.slice(0, 3) + "-" + val.slice(3);
+    } else if (val.length > 5) {
+        val = val.slice(0, 3) + "-" + val.slice(3, 5) + "-" + val.slice(5, 9);
+    }
+    
+    input.value = val; 
+
+    if (val.length !== 11) { 
+        err.innerText = "Error: Must be 9 digits"; 
+        return false; 
+    }
     err.innerText = ""; return true;
 }
 
+
 function validateEmail() {
-    const val = document.getElementById('email').value;
+    const input = document.getElementById('email');
+    input.value = input.value.toLowerCase(); 
+    const val = input.value;
     const err = document.getElementById('emailError');
+    
     if (!/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i.test(val)) {
         err.innerText = "Error: Invalid email format"; return false;
     }
@@ -109,10 +132,11 @@ function validateState() {
     err.innerText = ""; return true;
 }
 
+
 function validateZip() {
     const val = document.getElementById('zip').value;
     const err = document.getElementById('zipError');
-    if (!/^[0-9\-]{5,10}$/.test(val)) { err.innerText = "Error: Invalid zip"; return false; }
+    if (!/^[0-9]{5}$/.test(val)) { err.innerText = "Error: Must be exactly 5 digits"; return false; }
     err.innerText = ""; return true;
 }
 
@@ -135,7 +159,7 @@ function validateTextArea() {
 function validateUserID() {
     const input = document.getElementById('userId');
     const err = document.getElementById('userIdError');
-    input.value = input.value.toLowerCase(); // Force lowercase per instructions
+    input.value = input.value.toLowerCase(); 
     const val = input.value;
     
     if (!/^[a-z][a-z0-9_\-]{4,29}$/.test(val)) {
@@ -166,25 +190,40 @@ function validatePasswords() {
     return valid;
 }
 
+function masterValidate() {
+    const isFNameValid = validateFirstName();
+    const isMInitValid = validateMiddleInitial();
+    const isLNameValid = validateLastName();
+    const isDOBValid = validateDOB();
+    const isSSNValid = validateSSN();
+    const isEmailValid = validateEmail();
+    const isPhoneValid = validatePhone();
+    const isAddress1Valid = validateAddress1();
+    const isAddress2Valid = validateAddress2();
+    const isCityValid = validateCity();
+    const isStateValid = validateState();
+    const isZipValid = validateZip();
+    const isRadioValid = validateRadio();
+    const isTextAreaValid = validateTextArea();
+    const isUserIDValid = validateUserID();
+    const isPasswordsValid = validatePasswords();
 
-function generateReview() {
-   
-    const isValid = validateFirstName() & validateLastName() & validateDOB() & validateSSN() & validateEmail() & validatePhone() & validateAddress1() & validateCity() & validateState() & validateZip() & validateRadio() & validateTextArea() & validateUserID() & validatePasswords();
+    const isValid = isFNameValid && isMInitValid && isLNameValid && isDOBValid && isSSNValid && isEmailValid && isPhoneValid && isAddress1Valid && isAddress2Valid && isCityValid && isStateValid && isZipValid && isRadioValid && isTextAreaValid && isUserIDValid && isPasswordsValid;
 
     if (!isValid) {
         alert("Please fix the errors on the form before reviewing.");
         return;
     }
 
+    document.getElementById('btnValidate').style.display = 'none';
+    document.getElementById('btnSubmit').style.display = 'inline-block';
 
     document.getElementById('reviewArea').style.display = 'block';
     const table = document.getElementById('reviewTable');
     
-
     const fullName = `${document.getElementById('fName').value} ${document.getElementById('mInit').value} ${document.getElementById('lName').value}`;
-    const fullAddress = `${document.getElementById('address1').value} ${document.getElementById('address2').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value.substring(0,5)}`; // Truncated Zip
+    const fullAddress = `${document.getElementById('address1').value} ${document.getElementById('address2').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value.substring(0,5)}`;
     
-
     let conditions = [];
     if(document.getElementById('chkPox').checked) conditions.push("Chicken Pox");
     if(document.getElementById('chkMeasles').checked) conditions.push("Measles");
@@ -193,8 +232,9 @@ function generateReview() {
     if(document.getElementById('chkCovid').checked) conditions.push("Covid-19");
     const conditionsStr = conditions.length > 0 ? conditions.join(", ") : "None";
 
-
-    const vacSelected = document.querySelector('input[name="vaccinated"]:checked').value;
+    let vacSelected = "Unsure";
+    const vacNode = document.querySelector('input[name="vaccinated"]:checked');
+    if (vacNode) vacSelected = vacNode.value;
 
     table.innerHTML = `
         <tr><th style="padding:8px; width:30%;">Field</th><th style="padding:8px; width:50%;">Data Entered</th><th style="padding:8px; width:20%;">Status</th></tr>
