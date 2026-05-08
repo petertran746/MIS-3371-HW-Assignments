@@ -2,9 +2,9 @@
 Program name: script.js
 Author: Peter Tran
 Date created: 03/24/2026
-Date last edited: 04/20/2026
-Version: 7.0
-Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, and injecting data into the review table.
+Date last edited: 05/08/2026
+Version: 10.0
+Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, injecting data into the review table, and Homework 4 state management (Cookies, Local Storage, Fetch API).
 */
 
 function updateSliderValue() {
@@ -58,15 +58,12 @@ function validateDOB() {
     err.innerText = ""; return true;
 }
 
-
 function validateSSN() {
     const input = document.getElementById('ssn');
     const err = document.getElementById('ssnError');
     
-
     let val = input.value.replace(/\D/g, ''); 
     
-  
     if (val.length > 3 && val.length <= 5) {
         val = val.slice(0, 3) + "-" + val.slice(3);
     } else if (val.length > 5) {
@@ -81,7 +78,6 @@ function validateSSN() {
     }
     err.innerText = ""; return true;
 }
-
 
 function validateEmail() {
     const input = document.getElementById('email');
@@ -131,7 +127,6 @@ function validateState() {
     if (!val) { err.innerText = "Error: Select a state"; return false; }
     err.innerText = ""; return true;
 }
-
 
 function validateZip() {
     const val = document.getElementById('zip').value;
@@ -250,3 +245,112 @@ function masterValidate() {
         <tr><td style="padding:5px;">Password</td><td style="padding:5px;">*******</td><td style="padding:5px; color:green;">pass</td></tr>
     `;
 }
+
+// --- NEW HOMEWORK 4 ADDITIONS: FETCH, COOKIES, STORAGE ---
+
+function setCookie(cname, cvalue, exhours) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exhours * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') { c = c.substring(1); }
+        if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+    }
+    return "";
+}
+
+function deleteCookie(cname) {
+    document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+async function loadStates() {
+    try {
+        const response = await fetch('states.html');
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        document.getElementById('state').innerHTML = await response.text();
+        
+        if(localStorage.getItem('state')) {
+            document.getElementById('state').value = localStorage.getItem('state');
+        }
+    } catch (error) {
+        console.log('Fetch failed: ', error);
+        document.getElementById('state').innerHTML = '<option value="">Error loading states</option>';
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    loadStates();
+
+    const savedFirstName = getCookie("firstName");
+    const greetingMessage = document.getElementById("greetingMessage");
+    const notUserContainer = document.getElementById("notUserContainer");
+    const notUserLabel = document.getElementById("notUserLabel");
+
+    if (savedFirstName !== "") {
+        greetingMessage.innerHTML = `Welcome back, ${savedFirstName}`;
+        document.getElementById("fName").value = savedFirstName;
+        
+        if (notUserContainer && notUserLabel) {
+            notUserContainer.style.display = "block";
+            notUserLabel.innerHTML = `Not ${savedFirstName}? Click HERE to start as a NEW USER.`;
+        }
+
+        const fieldsToRestore = ['lName', 'email', 'phone', 'address1', 'city', 'zip'];
+        fieldsToRestore.forEach(id => {
+            if(localStorage.getItem(id)) {
+                const elem = document.getElementById(id);
+                if(elem) elem.value = localStorage.getItem(id);
+            }
+        });
+    } else {
+        if (greetingMessage) greetingMessage.innerHTML = "Welcome New user";
+    }
+
+    const inputsToSave = ['lName', 'email', 'phone', 'address1', 'city', 'zip', 'state'];
+    inputsToSave.forEach(id => {
+        const element = document.getElementById(id);
+        if(element) {
+            element.addEventListener('blur', function() {
+                localStorage.setItem(id, this.value);
+            });
+        }
+    });
+
+    const notUserCheck = document.getElementById("notUserCheck");
+    if(notUserCheck) {
+        notUserCheck.addEventListener('change', function() {
+            if(this.checked) {
+                deleteCookie("firstName");
+                localStorage.clear();
+                document.getElementById("registrationForm").reset();
+                if (greetingMessage) greetingMessage.innerHTML = "Welcome New user";
+                if (notUserContainer) notUserContainer.style.display = "none";
+                this.checked = false; 
+            }
+        });
+    }
+
+    // Attach to the final submit button to save the cookie
+    const finalSubmitBtn = document.getElementById("btnSubmit");
+    if(finalSubmitBtn) {
+        finalSubmitBtn.addEventListener('click', function() {
+            const rememberMeElem = document.getElementById("rememberMe");
+            const rememberMe = rememberMeElem ? rememberMeElem.checked : false;
+            const currentFirstName = document.getElementById("fName").value;
+
+            if (rememberMe) {
+                setCookie("firstName", currentFirstName, 48);
+            } else {
+                deleteCookie("firstName");
+                localStorage.clear();
+            }
+        });
+    }
+});
