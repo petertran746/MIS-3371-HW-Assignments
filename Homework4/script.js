@@ -1,0 +1,252 @@
+/*
+Program name: script.js
+Author: Peter Tran
+Date created: 03/24/2026
+Date last edited: 04/20/2026
+Version: 7.0
+Description: This JavaScript file contains the modular logic for client-side form validation, inline error clearing, dynamic slider updates, and injecting data into the review table.
+*/
+
+function updateSliderValue() {
+    document.getElementById('painOutput').innerText = document.getElementById('painSlider').value;
+}
+
+function validateFirstName() {
+    const val = document.getElementById('fName').value;
+    const err = document.getElementById('fNameError');
+    if (!/^[A-Za-z'\-]{1,30}$/.test(val)) {
+        err.innerText = "Error: 1-30 chars, letters/apostrophes/dashes only";
+        return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validateMiddleInitial() {
+    const val = document.getElementById('mInit').value;
+    const err = document.getElementById('mInitError');
+    if (val && !/^[A-Za-z]{1}$/.test(val)) {
+        err.innerText = "Error: 1 char, letters only";
+        return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validateLastName() {
+    const val = document.getElementById('lName').value;
+    const err = document.getElementById('lNameError');
+    if (!/^[A-Za-z'\-2-5]{1,30}$/.test(val)) {
+        err.innerText = "Error: Invalid last name format";
+        return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validateDOB() {
+    const val = document.getElementById('dob').value;
+    const err = document.getElementById('dobError');
+    if (!val) { err.innerText = "Error: DOB required"; return false; }
+    
+    const dob = new Date(val);
+    const today = new Date();
+    
+    let minDate = new Date();
+    minDate.setFullYear(today.getFullYear() - 120);
+
+    if (dob > today) { err.innerText = "Error: Cannot be in future"; return false; }
+    if (dob < minDate) { err.innerText = "Error: Cannot be > 120 years ago"; return false; }
+    
+    err.innerText = ""; return true;
+}
+
+
+function validateSSN() {
+    const input = document.getElementById('ssn');
+    const err = document.getElementById('ssnError');
+    
+
+    let val = input.value.replace(/\D/g, ''); 
+    
+  
+    if (val.length > 3 && val.length <= 5) {
+        val = val.slice(0, 3) + "-" + val.slice(3);
+    } else if (val.length > 5) {
+        val = val.slice(0, 3) + "-" + val.slice(3, 5) + "-" + val.slice(5, 9);
+    }
+    
+    input.value = val; 
+
+    if (val.length !== 11) { 
+        err.innerText = "Error: Must be 9 digits"; 
+        return false; 
+    }
+    err.innerText = ""; return true;
+}
+
+
+function validateEmail() {
+    const input = document.getElementById('email');
+    input.value = input.value.toLowerCase(); 
+    const val = input.value;
+    const err = document.getElementById('emailError');
+    
+    if (!/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i.test(val)) {
+        err.innerText = "Error: Invalid email format"; return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validatePhone() {
+    const val = document.getElementById('phone').value;
+    const err = document.getElementById('phoneError');
+    if (!/^\d{3}-\d{3}-\d{4}$/.test(val)) {
+        err.innerText = "Error: Format 000-000-0000"; return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validateAddress1() {
+    const val = document.getElementById('address1').value;
+    const err = document.getElementById('address1Error');
+    if (val.length < 2 || val.length > 30) { err.innerText = "Error: 2-30 chars"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateAddress2() {
+    const val = document.getElementById('address2').value;
+    const err = document.getElementById('address2Error');
+    if (val && (val.length < 2 || val.length > 30)) { err.innerText = "Error: 2-30 chars"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateCity() {
+    const val = document.getElementById('city').value;
+    const err = document.getElementById('cityError');
+    if (val.length < 2 || val.length > 30) { err.innerText = "Error: 2-30 chars"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateState() {
+    const val = document.getElementById('state').value;
+    const err = document.getElementById('stateError');
+    if (!val) { err.innerText = "Error: Select a state"; return false; }
+    err.innerText = ""; return true;
+}
+
+
+function validateZip() {
+    const val = document.getElementById('zip').value;
+    const err = document.getElementById('zipError');
+    if (!/^[0-9]{5}$/.test(val)) { err.innerText = "Error: Must be exactly 5 digits"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateRadio() {
+    const radios = document.getElementsByName('vaccinated');
+    const err = document.getElementById('radioError');
+    let isChecked = false;
+    for (let i = 0; i < radios.length; i++) { if (radios[i].checked) isChecked = true; }
+    if (!isChecked) { err.innerText = "Error: Make a selection"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateTextArea() {
+    const val = document.getElementById('symptoms').value;
+    const err = document.getElementById('symptomsError');
+    if (val.includes('"')) { err.innerText = "Error: Double quotes not allowed"; return false; }
+    err.innerText = ""; return true;
+}
+
+function validateUserID() {
+    const input = document.getElementById('userId');
+    const err = document.getElementById('userIdError');
+    input.value = input.value.toLowerCase(); 
+    const val = input.value;
+    
+    if (!/^[a-z][a-z0-9_\-]{4,29}$/.test(val)) {
+        err.innerText = "Error: 5-30 chars, letters/nums/_/- only, starts with letter";
+        return false;
+    }
+    err.innerText = ""; return true;
+}
+
+function validatePasswords() {
+    const pwd1 = document.getElementById('pwd1').value;
+    const pwd2 = document.getElementById('pwd2').value;
+    const userId = document.getElementById('userId').value;
+    const err1 = document.getElementById('pwd1Error');
+    const err2 = document.getElementById('pwd2Error');
+    let valid = true;
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#%^&*()_\-+=\/><.,`~])[^"]{8,30}$/.test(pwd1)) {
+        err1.innerText = "Error: Invalid password format"; valid = false;
+    } else if (userId && pwd1.includes(userId)) {
+        err1.innerText = "Error: Password cannot contain User ID"; valid = false;
+    } else { err1.innerText = ""; }
+
+    if (pwd1 !== pwd2 && pwd2) {
+        err2.innerText = "Error: Passwords do not match"; valid = false;
+    } else { err2.innerText = ""; }
+
+    return valid;
+}
+
+function masterValidate() {
+    const isFNameValid = validateFirstName();
+    const isMInitValid = validateMiddleInitial();
+    const isLNameValid = validateLastName();
+    const isDOBValid = validateDOB();
+    const isSSNValid = validateSSN();
+    const isEmailValid = validateEmail();
+    const isPhoneValid = validatePhone();
+    const isAddress1Valid = validateAddress1();
+    const isAddress2Valid = validateAddress2();
+    const isCityValid = validateCity();
+    const isStateValid = validateState();
+    const isZipValid = validateZip();
+    const isRadioValid = validateRadio();
+    const isTextAreaValid = validateTextArea();
+    const isUserIDValid = validateUserID();
+    const isPasswordsValid = validatePasswords();
+
+    const isValid = isFNameValid && isMInitValid && isLNameValid && isDOBValid && isSSNValid && isEmailValid && isPhoneValid && isAddress1Valid && isAddress2Valid && isCityValid && isStateValid && isZipValid && isRadioValid && isTextAreaValid && isUserIDValid && isPasswordsValid;
+
+    if (!isValid) {
+        alert("Please fix the errors on the form before reviewing.");
+        return;
+    }
+
+    document.getElementById('btnValidate').style.display = 'none';
+    document.getElementById('btnSubmit').style.display = 'inline-block';
+
+    document.getElementById('reviewArea').style.display = 'block';
+    const table = document.getElementById('reviewTable');
+    
+    const fullName = `${document.getElementById('fName').value} ${document.getElementById('mInit').value} ${document.getElementById('lName').value}`;
+    const fullAddress = `${document.getElementById('address1').value} ${document.getElementById('address2').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value.substring(0,5)}`;
+    
+    let conditions = [];
+    if(document.getElementById('chkPox').checked) conditions.push("Chicken Pox");
+    if(document.getElementById('chkMeasles').checked) conditions.push("Measles");
+    if(document.getElementById('chkMumps').checked) conditions.push("Mumps");
+    if(document.getElementById('chkHeart').checked) conditions.push("Heart Disease");
+    if(document.getElementById('chkCovid').checked) conditions.push("Covid-19");
+    const conditionsStr = conditions.length > 0 ? conditions.join(", ") : "None";
+
+    let vacSelected = "Unsure";
+    const vacNode = document.querySelector('input[name="vaccinated"]:checked');
+    if (vacNode) vacSelected = vacNode.value;
+
+    table.innerHTML = `
+        <tr><th style="padding:8px; width:30%;">Field</th><th style="padding:8px; width:50%;">Data Entered</th><th style="padding:8px; width:20%;">Status</th></tr>
+        <tr><td style="padding:5px;">Full Name</td><td style="padding:5px;">${fullName}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Date of Birth</td><td style="padding:5px;">${document.getElementById('dob').value}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Contact (Email/Phone)</td><td style="padding:5px;">${document.getElementById('email').value} / ${document.getElementById('phone').value}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Address</td><td style="padding:5px;">${fullAddress}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Medical Conditions</td><td style="padding:5px;">${conditionsStr}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Vaccinated?</td><td style="padding:5px;">${vacSelected}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Pain Level</td><td style="padding:5px;">${document.getElementById('painSlider').value}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Symptoms</td><td style="padding:5px;">${document.getElementById('symptoms').value}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">User ID</td><td style="padding:5px;">${document.getElementById('userId').value}</td><td style="padding:5px; color:green;">pass</td></tr>
+        <tr><td style="padding:5px;">Password</td><td style="padding:5px;">*******</td><td style="padding:5px; color:green;">pass</td></tr>
+    `;
+}
